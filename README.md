@@ -1,11 +1,18 @@
-# QMLTable
-Table implementation for Qt 5 with QtQuick Components 2
+# QMLTable 2
+Based on [QMLTable](https://github.com/spuschhof/QMLTable)
 
 ## Goals
-QMLTable adds an easy to use and performant table view implementation to QtQuick. Is does not provide as many features as QtQUick Components 1's TableView, but can be used to create simple table views.
+Add Pre & Post Column to support complicated operation
 
-## Documentation
-QMLTables uses DoxyQML fopr documentation. See https://github.com/agateau/doxyqml
+PreColumn
+
+* Show row index
+* Show radio box 
+* Show check box
+
+PostColumn
+
+* Add user defined actions , like Edit Row & Delete Row
 
 ## Usage
 To use QMLTable, simply add the QML files to your project. A basic table definition could look like this:
@@ -16,6 +23,15 @@ To use QMLTable, simply add the QML files to your project. A basic table definit
             anchors.fill: parent
             model: tableModel
     
+            TablePreColumn {
+                dataRole: "name"
+                headerText: "#"
+                columnWidth: 30
+                cellDelegate: TableIndexCellDelegate {
+                    ...
+                }
+            }
+    
             TableColumn {
                 textRole: "name"
                 headerText: "Name"
@@ -25,6 +41,15 @@ To use QMLTable, simply add the QML files to your project. A basic table definit
                 textRole: "data"
                 headerText: "Data"
                 columnWidth: table.headerWidth - 200
+            }
+            
+            TablePostColumn {
+                dataRole: "name"
+                headerText: "Actions"
+                columnWidth: 100
+                cellDelegate: TableActionCellDelegate {
+                    ...
+                }
             }
         }
     
