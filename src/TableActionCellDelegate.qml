@@ -1,7 +1,7 @@
 import QtQuick 2.5
 import QtQuick.Layouts 1.1
 
-/** @brief Default delegate used for \c Table cells.
+/** @brief Action delegate used for \c Table cells to show user customized action for row.
  *
  * If you create your own delegate, not inhereting from \c TableCellDelegate,
  * add the \c column, \c row, \c itemData, \c cellWidth and \c useTableFont
