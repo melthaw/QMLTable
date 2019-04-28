@@ -39,5 +39,6 @@ Text {
     Layout.minimumWidth: cellWidth
     Layout.maximumWidth: cellWidth
     verticalAlignment: Text.AlignVCenter
-    horizontalAlignment: Text.AlignLeft
+    horizontalAlignment: Text.AlignHCenter
+
 }

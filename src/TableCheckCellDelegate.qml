@@ -39,5 +39,13 @@ Text {
     Layout.minimumWidth: cellWidth
     Layout.maximumWidth: cellWidth
     verticalAlignment: Text.AlignVCenter
-    horizontalAlignment: Text.AlignLeft
+
+    CheckBox {
+        anchors.centerIn : parent
+    }
+
+    Component.onCompleted: {
+        this.text = ""
+    }
+
 }
