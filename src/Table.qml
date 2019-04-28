@@ -148,19 +148,56 @@ Item {
 
                     Component.onCompleted: {
                         for(var i = 0; i < columns.length; i++) {
-                            var obj = columns[i].cellDelegate.createObject(
-                                tableRow,
-                                {text: model[columns[i].textRole],
-                                 itemData: model[columns[i].dataRole],
-                                 column: i,
-                                 row: index,
-                                 cellWidth: Qt.binding(function() {
-                                     return columns[this.column].
-                                            columnWidth;})});
+                            if (columns[i] instanceof TablePreColumn) {
+                                var obj = columns[i].cellDelegate.createObject(
+                                                tableRow,
+                                                {
+                                                    text: index + 1,
+                                                    itemData: model,
+                                                    column: i,
+                                                    row: index,
+                                                    cellWidth: Qt.binding(
+                                                        function() { return columns[this.column].columnWidth;}
+                                                    )
+                                                 });
 
-                            if(obj.useTableFont) {
-                                obj.font = Qt.binding(function() {
-                                    return tableFont;});
+                                if(obj.useTableFont) {
+                                    obj.font = Qt.binding(function() { return tableFont;});
+                                }
+                            }
+                            else if (columns[i] instanceof TablePostColumn) {
+                                var obj = columns[i].cellDelegate.createObject(
+                                                tableRow,
+                                                {
+                                                    text: model[columns[i].textRole],
+                                                    itemData: model,
+                                                    column: i,
+                                                    row: index,
+                                                    cellWidth: Qt.binding(
+                                                        function() { return columns[this.column].columnWidth;}
+                                                    )
+                                                 });
+
+                                if(obj.useTableFont) {
+                                    obj.font = Qt.binding(function() { return tableFont;});
+                                }
+                            }
+                            else {
+                                var obj = columns[i].cellDelegate.createObject(
+                                                tableRow,
+                                                {
+                                                    text: model[columns[i].textRole],
+                                                    itemData: model[columns[i].dataRole],
+                                                    column: i,
+                                                    row: index,
+                                                    cellWidth: Qt.binding(
+                                                        function() { return columns[this.column].columnWidth;}
+                                                    )
+                                                 });
+
+                                if(obj.useTableFont) {
+                                    obj.font = Qt.binding(function() { return tableFont;});
+                                }
                             }
                         }
                     }
